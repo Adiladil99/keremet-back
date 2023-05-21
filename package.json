@@ -1,0 +1,50 @@
+{
+  "name": "keremet-back",
+  "version": "1.0.0",
+  "description": "Keremet Logistics backend (NodeJS)",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "rest",
+    "api",
+    "sequelize",
+    "mysql"
+  ],
+  "author": "bezkoder",
+  "license": "ISC",
+  "dependencies": {
+    "@adminjs/express": "^5.0.1",
+    "@adminjs/sequelize": "^3.0.0",
+    "@adminjs/upload": "^3.0.1",
+    "adminjs": "^6.6.3",
+    "argon2": "^0.30.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
+    "chart.js": "^4.1.2",
+    "connect-pg-simple": "^7.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-formidable": "^1.2.0",
+    "express-session": "^1.17.3",
+    "flat": "^5.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "moment-timezone": "^0.5.43",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^2.0.2",
+    "nodemon": "^2.0.20",
+    "react": "^18.2.0",
+    "recharts": "^2.2.0",
+    "sequelize": "^6.21.0",
+    "sequelize-hierarchy": "^2.0.4",
+    "sequelize-i18n": "^1.1.0",
+    "sequelize-slugify": "^1.6.2",
+    "slug": "^8.2.2",
+    "styled-components": "^5.3.6",
+    "tslib": "^2.4.1"
+  }
+}
