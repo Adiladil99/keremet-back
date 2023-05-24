@@ -25,6 +25,9 @@ module.exports = (sequelize, Sequelize) => {
       values: ['Ожидает оплаты', 'Оплачено', 'Отменено'],
       defaultValue: 'Ожидает оплаты'
     },
+    price: {
+      type: Sequelize.INTEGER
+    }
   }, {
     indexes: [
       {

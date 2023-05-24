@@ -7,13 +7,26 @@ exports.getOrders = async (req, res) => {
     include: [{
       model: db.orders,
       as: 'orderId'
+    }, {
+      model: db.drivers,
+      as: 'driverId',
+      attributes: ["fio", "email", "phone"]
     }],
     where: { client_id: req.userId},
+  })
+  .then(order => {
+    res.status(200).send({
+      data: order
+    });
+  })
+  .catch(err => {
+    res.status(500).send({ message: err.message });
   })
 };
 
 exports.postOrders = async (req, res) => {
   const client_id = req.userId
+  const price = req.body.price
   db.orders.create({	
     type: req.body.type,
     door_to_door: req.body.door_to_door,
@@ -41,12 +54,13 @@ exports.postOrders = async (req, res) => {
 
     db.order_status.create({
       client_id: client_id,
-      order_id: orderId
+      order_id: orderId,
+        price: price
     })
     .then(status => {
       res.status(200).send({
         order: order,
-        status: status
+        status: status,
       });
     })
     .catch(err => {
