@@ -71,16 +71,6 @@ module.exports = {
         },
     },
  ],
- pages: {
-    Заказы: {
-        name: 'Статистики по заказам',
-        component: Components.MyInput
-    },    
-    Водители: {
-        name: 'Статистики по водителям',
-        component: Components.MyInput
-    }
- },
  rootPath: '/admin',
  locale: {
   language: 'ru',

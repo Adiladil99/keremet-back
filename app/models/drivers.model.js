@@ -25,6 +25,9 @@ module.exports = (sequelize, Sequelize) => {
     password: {
       type: Sequelize.STRING
     },
+    geoloc: {
+      type: Sequelize.STRING
+    },
   }, {
     indexes: [
       {

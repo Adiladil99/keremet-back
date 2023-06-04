@@ -10,7 +10,7 @@ exports.getOrders = async (req, res) => {
     }, {
       model: db.drivers,
       as: 'driverId',
-      attributes: ["fio", "email", "phone"]
+      attributes: ["fio", "email", "phone", "geoloc", "id"]
     }],
     where: { client_id: req.userId},
   })
@@ -23,6 +23,29 @@ exports.getOrders = async (req, res) => {
     res.status(500).send({ message: err.message });
   })
 };
+
+exports.getOrders1 = async (req, res) => {
+  await db.order_status.findAll({ 
+    include: [{
+      model: db.orders,
+      as: 'orderId'
+    }, {
+      model: db.drivers,
+      as: 'driverId',
+      attributes: ["fio", "email", "phone", "geoloc", "id"]
+    }],
+    where: { driver_id: req.body.drid},
+  })
+  .then(order => {
+    res.status(200).send({
+      data: order
+    });
+  })
+  .catch(err => {
+    res.status(500).send({ message: err.message });
+  })
+};
+
 
 exports.postOrders = async (req, res) => {
   const client_id = req.userId

@@ -92,7 +92,7 @@ const start = async () => {
 
   const Role = db.role;
   // {alter:true}
-  // {alter:true, force: true}
+  // {force: true}
   db.sequelize.sync()
     .then(() => {
       console.log("Synced db.");

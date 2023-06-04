@@ -67,6 +67,9 @@ module.exports = (sequelize, Sequelize) => {
     comments: {
       type: Sequelize.TEXT
     },
+    code_sms: {
+      type: Sequelize.STRING
+    },
     map_data: {
       type: Sequelize.TEXT
     }
@@ -76,6 +79,10 @@ module.exports = (sequelize, Sequelize) => {
         if (!order.track_number) {
           // Генерация уникального значения для track_number
           order.track_number = generateUniqueTrackNumber();
+        }
+        if (!order.code_sms) {
+          // Генерация уникального значения для track_number
+          order.code_sms = generateUniqueCode();
         }
       }
     },
@@ -94,4 +101,11 @@ function generateUniqueTrackNumber() {
   const timestamp = new Date().getTime();
   const randomDigits = Math.floor(Math.random() * 1000);
   return `TN-${timestamp}-${randomDigits}`;
+}
+
+function generateUniqueCode() {
+  const min = 100000; // Minimum 6-digit number
+  const max = 999999; // Maximum 6-digit number
+  const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+  return randomNum.toString();
 }

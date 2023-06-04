@@ -80,8 +80,17 @@ button:hover {
 svg {
  width: 100% !important;
 }
-.buOzpT {
+.buOzpT, .dnZKfp {
  display: none;
+}
+
+.kZqEyG {
+ height: 100%;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ gap: 10px;
+ text-align: center;
 }
 
 .cMUlrr {
