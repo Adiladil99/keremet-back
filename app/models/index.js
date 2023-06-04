@@ -23,11 +23,13 @@ db.cities = require("./cities.model.js")(sequelize, Sequelize);
 db.clients = require("./clients.model.js")(sequelize, Sequelize);
 db.drivers = require("./drivers.model.js")(sequelize, Sequelize);
 db.orders = require("./orders.model.js")(sequelize, Sequelize);
+db.moving = require("./moving.model.js")(sequelize, Sequelize);
 db.order_status = require("./order_status.model.js")(sequelize, Sequelize);
 db.order_history = require("./order_history.model.js")(sequelize, Sequelize);
 
 // db.orders.belongsTo(db.cities, { foreignKey: 'sender_city', as: 'senderCity' });
 // db.orders.belongsTo(db.cities, { foreignKey: 'recipient_city', as: 'recipientCity' });
+db.moving.belongsTo(db.clients, { foreignKey: 'client_id', as: 'clientId' });
 db.order_status.belongsTo(db.orders, { foreignKey: 'order_id', as: 'orderId' });
 db.order_status.belongsTo(db.clients, { foreignKey: 'client_id', as: 'clientId' });
 db.order_status.belongsTo(db.drivers, { foreignKey: 'driver_id', as: 'driverId' });

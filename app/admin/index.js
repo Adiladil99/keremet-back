@@ -21,6 +21,16 @@ module.exports = {
         },
     },
     {
+        resource: db.moving,
+        options: {
+            navigation: sidebar[1],
+            properties: {
+                createdAt: { isVisible: { list: false } },
+                updatedAt: { isVisible: { list: false } },
+            },
+        },
+    },
+    {
         resource: db.drivers,
         options: {
             navigation: sidebar[0],
