@@ -13,7 +13,7 @@ const moment = require('moment-timezone');
 const PORT = process.env.PORT || 3002;
 // const PORT = process.env.PORT || 3000;
 const DEFAULT_ADMIN = {
-  email: 'admin@keremet.kz',
+  email: 'admin@gmail.com',
   password: 'admin',
 }
 const db = require("./app/models");

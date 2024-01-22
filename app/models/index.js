@@ -19,21 +19,52 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.cities = require("./cities.model.js")(sequelize, Sequelize);
-db.clients = require("./clients.model.js")(sequelize, Sequelize);
-db.drivers = require("./drivers.model.js")(sequelize, Sequelize);
-db.orders = require("./orders.model.js")(sequelize, Sequelize);
-db.moving = require("./moving.model.js")(sequelize, Sequelize);
-db.order_status = require("./order_status.model.js")(sequelize, Sequelize);
-db.order_history = require("./order_history.model.js")(sequelize, Sequelize);
+db.category = require("./category.model.js")(sequelize, Sequelize);
+db.sub_category = require("./sub_category.model.js")(sequelize, Sequelize, db.category);
+db.master = require("./master.model.js")(sequelize, Sequelize);
+db.service = require("./service.model.js")(sequelize, Sequelize, db.sub_category);
+db.client_basket = require("./client_basket.model.js")(sequelize, Sequelize);
+db.client_favourites = require("./client_favourites.model.js")(sequelize, Sequelize);
+db.client_history = require("./client_history.model.js")(sequelize, Sequelize);
+db.client = require("./client.model.js")(sequelize, Sequelize);
+db.discount = require("./discount.model.js")(sequelize, Sequelize, db.master);
+db.faq = require("./faq.model.js")(sequelize, Sequelize);
+db.master_comments = require("./master_comments.model.js")(sequelize, Sequelize, db.master, db.client);
+db.master_gallery = require("./master_gallery.model.js")(sequelize, Sequelize, db.master);
+db.master_services = require("./master_services.model.js")(sequelize, Sequelize, db.service, db.master);
+db.master_socials = require("./master_socials.model.js")(sequelize, Sequelize, db.master);
+db.order_list = require("./order_list.model.js")(sequelize, Sequelize);
+db.order = require("./order.model.js")(sequelize, Sequelize);
+db.static_info = require("./static_info.model.js")(sequelize, Sequelize);
+
+db.category.hasMany(db.sub_category, { as: 'childs', foreignKey: 'category_id' });
+db.master.hasMany(db.master_gallery, { as: 'gallery', foreignKey: 'master_id' });
+db.master.hasMany(db.master_services, { as: 'services', foreignKey: 'master_id' });
+db.master.hasMany(db.master_comments, { as: 'comments', foreignKey: 'master_id' });
+db.master.hasMany(db.master_socials, { as: 'socials', foreignKey: 'master_id' });
+
+db.sub_category.hasMany(db.service, { as: 'services', foreignKey: 'subcategory_id' });
+db.service.hasMany(db.master_services, { as: 'masters', foreignKey: 'service_id' });
+
+db.master_services.belongsTo(db.master, { foreignKey: 'master_id', as: 'master' })
+db.master_services.belongsTo(db.service, { foreignKey: 'service_id', as: 'service' })
+
+
+
+// db.clients = require("./client.model.js")(sequelize, Sequelize);
+// db.drivers = require("./drivers.model.js")(sequelize, Sequelize);
+// db.orders = require("./orders.model.js")(sequelize, Sequelize);
+// db.moving = require("./moving.model.js")(sequelize, Sequelize);
+// db.order_status = require("./order_status.model.js")(sequelize, Sequelize);
+// db.order_history = require("./order_history.model.js")(sequelize, Sequelize);
 
 // db.orders.belongsTo(db.cities, { foreignKey: 'sender_city', as: 'senderCity' });
 // db.orders.belongsTo(db.cities, { foreignKey: 'recipient_city', as: 'recipientCity' });
-db.moving.belongsTo(db.clients, { foreignKey: 'client_id', as: 'clientId' });
-db.order_status.belongsTo(db.orders, { foreignKey: 'order_id', as: 'orderId' });
-db.order_status.belongsTo(db.clients, { foreignKey: 'client_id', as: 'clientId' });
-db.order_status.belongsTo(db.drivers, { foreignKey: 'driver_id', as: 'driverId' });
-db.order_history.belongsTo(db.order_status, { foreignKey: 'order_status_id', as: 'orderStatusId' });
+// db.moving.belongsTo(db.clients, { foreignKey: 'client_id', as: 'clientId' });
+// db.order_status.belongsTo(db.orders, { foreignKey: 'order_id', as: 'orderId' });
+// db.order_status.belongsTo(db.clients, { foreignKey: 'client_id', as: 'clientId' });
+// db.order_status.belongsTo(db.drivers, { foreignKey: 'driver_id', as: 'driverId' });
+// db.order_history.belongsTo(db.order_status, { foreignKey: 'order_status_id', as: 'orderStatusId' });
 
 // db.tarrif = require("./products/tarrif.model.js")(sequelize, Sequelize, db.car);
 

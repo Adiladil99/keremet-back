@@ -2,6 +2,11 @@ const db = require("../models");
 const ru = require("./locale/ru.js");
 const themes = require("./theme/theme.js");
 const sidebar = require("./resources/navigation");
+const category = require("./resources/options/category.option")
+const sub_category = require("./resources/options/sub_category.option")
+const master_gallery = require("./resources/options/master_gallery.option")
+const master = require("./resources/options/master.option")
+const discounts = require("./resources/options/discounts.option")
 const { Components, componentLoader } = require('./components/components.js')
 
 const dashboardHandler = async (request, response, context) => {
@@ -10,18 +15,21 @@ const dashboardHandler = async (request, response, context) => {
 }
 module.exports = {
  resources: [
+    category,
+    sub_category,
+    discounts,
+    // {
+    //     resource: db.category,
+    //     options: {
+    //         navigation: sidebar[0],
+    //         properties: {
+    //             createdAt: { isVisible: { list: false } },
+    //             updatedAt: { isVisible: { list: false } },
+    //         },
+    //     },
+    // },
     {
-        resource: db.clients,
-        options: {
-            navigation: sidebar[0],
-            properties: {
-                createdAt: { isVisible: { list: false } },
-                updatedAt: { isVisible: { list: false } },
-            },
-        },
-    },
-    {
-        resource: db.moving,
+        resource: db.client_basket,
         options: {
             navigation: sidebar[1],
             properties: {
@@ -31,7 +39,99 @@ module.exports = {
         },
     },
     {
-        resource: db.drivers,
+        resource: db.client_favourites,
+        options: {
+            navigation: sidebar[1],
+            properties: {
+                createdAt: { isVisible: { list: false } },
+                updatedAt: { isVisible: { list: false } },
+            },
+        },
+    },
+    {
+        resource: db.client_history,
+        options: {
+            navigation: sidebar[1],
+            properties: {
+                createdAt: { isVisible: { list: false } },
+                updatedAt: { isVisible: { list: false } },
+            },
+        },
+    },
+    {
+        resource: db.client,
+        options: {
+            navigation: sidebar[1],
+            properties: {
+                createdAt: { isVisible: { list: false } },
+                updatedAt: { isVisible: { list: false } },
+            },
+        },
+    },
+    {
+        resource: db.faq,
+        options: {
+            navigation: sidebar[4],
+            properties: {
+                createdAt: { isVisible: { list: false } },
+                updatedAt: { isVisible: { list: false } },
+            },
+        },
+    },
+    {
+        resource: db.master_comments,
+        options: {
+            navigation: sidebar[2],
+            properties: {
+                createdAt: { isVisible: { list: false } },
+                updatedAt: { isVisible: { list: false } },
+            },
+        },
+    },
+    master_gallery,
+    {
+        resource: db.master_services,
+        options: {
+            navigation: sidebar[2],
+            properties: {
+                createdAt: { isVisible: { list: false } },
+                updatedAt: { isVisible: { list: false } },
+            },
+        },
+    },
+    {
+        resource: db.master_socials,
+        options: {
+            navigation: sidebar[2],
+            properties: {
+                createdAt: { isVisible: { list: false } },
+                updatedAt: { isVisible: { list: false } },
+            },
+        },
+    },
+    master,
+    {
+        resource: db.order_list,
+        options: {
+            navigation: sidebar[3],
+            properties: {
+                createdAt: { isVisible: { list: false } },
+                updatedAt: { isVisible: { list: false } },
+            },
+        },
+    },
+    {
+        resource: db.order,
+        options: {
+            navigation: sidebar[3],
+            properties: {
+                createdAt: { isVisible: { list: false } },
+                updatedAt: { isVisible: { list: false } },
+            },
+        },
+    },
+    {
+        resource: db.service,
         options: {
             navigation: sidebar[0],
             properties: {
@@ -41,39 +141,9 @@ module.exports = {
         },
     },
     {
-        resource: db.cities,
+        resource: db.static_info,
         options: {
-            navigation: sidebar[0],
-            properties: {
-                createdAt: { isVisible: { list: false } },
-                updatedAt: { isVisible: { list: false } },
-            },
-        },
-    },
-    {
-        resource: db.orders,
-        options: {
-            navigation: sidebar[2],
-            properties: {
-                createdAt: { isVisible: { list: false } },
-                updatedAt: { isVisible: { list: false } },
-            },
-        },
-    },
-    {
-        resource: db.order_status,
-        options: {
-            navigation: sidebar[2],
-            properties: {
-                createdAt: { isVisible: { list: false } },
-                updatedAt: { isVisible: { list: false } },
-            },
-        },
-    },
-    {
-        resource: db.order_history,
-        options: {
-            navigation: sidebar[2],
+            navigation: sidebar[4],
             properties: {
                 createdAt: { isVisible: { list: false } },
                 updatedAt: { isVisible: { list: false } },
@@ -89,7 +159,7 @@ module.exports = {
  branding: {
     logo: '/logo.png',
     favicon: '/favicon.png',
-    companyName: 'Keremet Logistics',
+    companyName: 'Sulu Face',
     withMadeWithLove: false,
     theme: themes
  },

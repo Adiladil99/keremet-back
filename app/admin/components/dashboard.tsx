@@ -32,7 +32,7 @@ export const DashboardHeader: React.FC = () => {
     opacity={[0.2, 0.4, 1]}
     animate
    >
-    <img style={{width: "250px"}} src="/phar1.png" />
+    <img style={{width: "250px", filter: "invert(1)"}} src="/phar1.png" />
     {/* <Illustration variant="FileSearch" /> //  'Moon' | 'Rocket' | 'Astronaut' | 'DocumentCheck' | 'DocumentSearch' | 'FileSearch' | 'FlagInCog' | 'Folders' | 'Launch' | 'Planet' | 'AdminJSLogo' | 'GithubLogo' | 'SlackLogo' | */}
    </Box>
    <Box
@@ -51,9 +51,9 @@ export const DashboardHeader: React.FC = () => {
     px={['default', 'lg', pageHeaderPaddingX]}
    >
     <Text textAlign="center" color="white">
-     <H2>Админ-панель Keremet Logistics</H2>
+     <H2>Админ-панель Sulu Face</H2>
      <Text opacity={0.8}>
-      Админ-панель для Keremet Logistics позволяет управлять настройками проекта, управление со всеми данными, удобный интерфейс для отслеживание и управление заказами.
+      Админ-панель для Sulu Face позволяет управлять настройками проекта, управление со всеми данными, удобный интерфейс для отслеживание и управление заказами.
      </Text>
     </Text>
    </Box>
@@ -159,10 +159,10 @@ export const Dashboard: React.FC = () => {
     <Box width={[1, 1, 1 / 3]} p="lg">
      <Card as="a" flex href="https://adminjs.page.link/slack" target="_blank">
       <Box ml="sm">
-       <H5>Количество товаров</H5>
+       <H5>Количество мастеров</H5>
        <Box flex alignItems={'center'}>
-        <Icon size={24} icon={'InventoryManagement'}/>
-        <Text fontSize={20} pl={5}>10567</Text>
+        <Icon size={24} icon={'User'}/>
+        <Text fontSize={20} pl={5}>17</Text>
        </Box>
       </Box>
      </Card>
@@ -173,7 +173,7 @@ export const Dashboard: React.FC = () => {
        <H5>Количество клиентов</H5>
        <Box flex alignItems={'center'}>
         <Icon size={24} icon={'Group'}/>
-        <Text fontSize={20} pl={5}>9782</Text>
+        <Text fontSize={20} pl={5}>142</Text>
        </Box>
       </Box>
      </Card>
@@ -181,7 +181,7 @@ export const Dashboard: React.FC = () => {
     <Box width={[1, 1, 1 / 3]} p="lg">
      <Card as="a" flex href="https://adminjs.page.link/slack" target="_blank">
       <Box ml="sm">
-       <H5>Количество магазинов</H5>
+       <H5>Количество заказов</H5>
        <Box flex alignItems={'center'}>
         <Icon size={24} icon={'Store'}/>
         <Text fontSize={20} pl={5}>38</Text>
@@ -224,13 +224,13 @@ export const Dashboard: React.FC = () => {
         <Box width={[1, 1, 1 / 2]} p="lg">
           <Card as="a" flex href="https://adminjs.page.link/slack" target="_blank">
             <div style={{width: "100%"}}>
-              <H5>Часто продаваемые продукты</H5>
+              <H5>Топ сервисы</H5>
               <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell>ID</TableCell>
-                    <TableCell>Тип характеристики</TableCell>
-                    <TableCell>Значение</TableCell>
+                    <TableCell>Наименование</TableCell>
+                    <TableCell>Заказы</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -247,13 +247,13 @@ export const Dashboard: React.FC = () => {
         <Box width={[1, 1, 1 / 2]} p="lg">
           <Card as="a" flex href="https://github.com/SoftwareBrothers/adminjs/issues" target="_blank">
             <div style={{width: "100%"}}>
-              <H5>Топ магазины</H5>
+              <H5>Топ мастеры</H5>
               <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell>ID</TableCell>
-                    <TableCell>Тип характеристики</TableCell>
-                    <TableCell>Значение</TableCell>
+                    <TableCell>ФИО</TableCell>
+                    <TableCell>Заказы</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

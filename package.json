@@ -1,7 +1,7 @@
 {
-  "name": "keremet-back",
+  "name": "suluface-back",
   "version": "1.0.0",
-  "description": "Keremet Logistics backend (NodeJS)",
+  "description": "SuluFace backend",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
@@ -18,7 +18,7 @@
   "author": "bezkoder",
   "license": "ISC",
   "dependencies": {
-    "@adminjs/express": "^5.0.1",
+    "@adminjs/express": "^5.1.0",
     "@adminjs/sequelize": "^3.0.0",
     "@adminjs/upload": "^3.0.1",
     "adminjs": "^6.6.3",
