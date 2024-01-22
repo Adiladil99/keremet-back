@@ -10,7 +10,7 @@ const AdminJSSequelize = require('@adminjs/sequelize')
 const adminOptions = require("./app/admin");
 const moment = require('moment-timezone');
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3003;
 // const PORT = process.env.PORT || 3000;
 const DEFAULT_ADMIN = {
   email: 'admin@gmail.com',
