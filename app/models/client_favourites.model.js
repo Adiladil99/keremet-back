@@ -1,16 +1,26 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, Sequelize, master, client) => {
   const client_favourites = sequelize.define("client_favourites", {
     id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
-    client_id: {
+    master_id: {      
       type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: master,
+        key: 'id',
+      }
     },
-    master_id: {
+    client_id: {      
       type: Sequelize.INTEGER,
-    }
+      allowNull: false,
+      references: {
+        model: client,
+        key: 'id',
+      }
+    },
   }, {
     indexes: [
       {

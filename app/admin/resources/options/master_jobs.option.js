@@ -1,12 +1,12 @@
 
 const { Components } = require('../../components/components.js')
-const db = require("../../../models");
-const sidebar = require("../navigation");
+const db = require("../../../models/index.js");
+const sidebar = require("../navigation.js");
 
 const {
   after: uploadAfterHook,
   before: uploadBeforeHook,
-} = require('../actions/upload-image.hook');
+} = require('../actions/upload-image.hook.js');
 
 // const categoryHandler = async (request, response, context) => {
 //   // console.log(context._admin);
@@ -18,7 +18,7 @@ const {
 // }
 
 const options = {
-  resource: db.master,
+  resource: db.master_jobs,
   options: {
     navigation: sidebar[2],
     properties: {
@@ -47,10 +47,22 @@ const options = {
     },
     actions: {
       new: {
-        isVisible: false,
+        after: async (response, request, context) => {
+          // const modifiedResponse = await passwordAfterHook(response, request, context);
+          return uploadAfterHook(response, request, context);
+        },
+        before: async (request, context) => {
+          // const modifiedRequest = await passwordBeforeHook(request, context);
+          return uploadBeforeHook(request, context);
+        },
       },
       edit: {
-        isVisible: false,
+        after: async (response, request, context) => {
+          return uploadAfterHook(response, request, context);
+        },
+        before: async (request, context) => {
+          return uploadBeforeHook(request, context);
+        },
       },
     },
   },  

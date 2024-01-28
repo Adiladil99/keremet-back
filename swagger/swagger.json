@@ -1,0 +1,622 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API SuluFace",
+      "description": "API for managing system",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3003/api"
+      }
+    ],
+    "tags": [
+      {
+        "name": "API для страниц сайта",
+        "description": "API данных для сайта"
+      },
+      {
+        "name": "Клиенты",
+        "description": "API для клиентов"
+      },
+      {
+        "name": "Мастеры",
+        "description": "API для мастеров"
+      },
+      {
+        "name": "Заказы",
+        "description": "API для создание заказа"
+      }
+    ],
+    "paths": {
+      "/pages/static/{type}": {
+        "get": {
+          "summary": "Получить данные статичных страниц",
+          "tags": ["API для страниц сайта"],
+          "parameters": [
+            {
+              "name": "type",
+              "description": "privacy, terms, payment, sitemap, contacts",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Данные страницы",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Static_Info"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/pages/mainpage": {
+        "get": {
+          "summary": "Получить данные главной страницы",
+          "tags": ["API для страниц сайта"],
+          "responses": {
+            "200": {
+              "description": "Главная страницы",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Static_Info"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/masters/{nickname}": {
+        "get": {
+          "summary": "Получить данные одного мастера",
+          "tags": ["API для страниц сайта"],
+          "parameters": [
+            {
+              "name": "nickname",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Данные страницы",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Static_Info"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/categories/c/{slug}": {
+        "get": {
+          "summary": "Получить данные по категории",
+          "tags": ["API для страниц сайта"],
+          "parameters": [
+            {
+              "name": "slug",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Данные страницы",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Static_Info"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/categories/s/{slug}": {
+        "get": {
+          "summary": "Получить данные по подкатегории",
+          "tags": ["API для страниц сайта"],
+          "parameters": [
+            {
+              "name": "slug",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Данные страницы",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Static_Info"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth-client/login": {
+        "post": {
+          "summary": "Вход клиента",
+          "tags": ["Клиенты"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Login"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth-client/register": {
+        "post": {
+          "summary": "Регистрация клиента",
+          "tags": ["Клиенты"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth-client/me": {
+        "get": {
+          "summary": "Получить данные пользователя",
+          "tags": ["Клиенты"],
+          "responses": {
+            "200": {
+              "description": "Данные клиента",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Client"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth-client/update": {
+        "put": {
+          "summary": "Обновление данных клиента",
+          "tags": ["Клиенты"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/client/favourites": {
+        "get": {
+          "summary": "Получить список избранных пользователя через Bearer Token",
+          "tags": ["Клиенты"],
+          "responses": {
+            "200": {
+              "description": "Список избранных",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Client"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Отправить master_id в body и Bearer Token для добавление в избранные",
+          "tags": ["Клиенты"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "master_id": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": ["master_id"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Добавление в избранные",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "default": "Успешно добавлено"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/client/favourites/{id}": {
+        "delete": {
+          "summary": "Удалить избранные через Bearer Token",
+          "tags": ["Клиенты"],
+          "parameters": [
+            {
+              "name": "id",
+              "description": "Отправить master_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Удалено",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "default": "Удалено"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/client/comment": {
+        "post": {
+          "summary": "Добавить коммент к мастеру. Отправить Bearer Token",
+          "tags": ["Клиенты"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Comment"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Добавление коммента",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "default": "Успешно добавлено"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth-master/login": {
+        "post": {
+          "summary": "Вход мастера",
+          "tags": ["Мастеры"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Login"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Данные мастера",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Master"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth-master/register": {
+        "post": {
+          "summary": "Регистрация мастера",
+          "tags": ["Мастеры"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Master"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth-master/me": {
+        "get": {
+          "summary": "Получить данные мастера",
+          "tags": ["Мастеры"],
+          "security": {
+            "bearerAuth": []  
+          },
+          "responses": {
+            "200": {
+              "description": "Данные мастера",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Master"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth-master/update": {
+        "put": {
+          "summary": "Редактировать данные мастера",
+          "tags": ["Мастеры"],
+          "security": {
+            "bearerAuth": []  
+          },
+          "responses": {
+            "200": {
+              "description": "Данные мастера",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Master"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+        "schemas": {
+          "Static_Info": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "Client": {
+            "type": "object",
+            "properties": {
+              "surname": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "gender": {
+                "type": "string"
+              },
+              "birthday": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            }
+          },
+          "Master": {
+            "type": "object",
+            "properties": {
+              "nickname": {
+                "type": "string"
+              },
+              "surname": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "gender": {
+                "type": "string"
+              },
+              "birthday": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            }
+          },
+          "Categories_cargo": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name_ru": {
+                "type": "string"
+              },
+              "name_kk": {
+                "type": "string"
+              },
+              "name_zh": {
+                "type": "string"
+              },
+              "name_en": {
+                "type": "string"
+              }
+            }
+          },
+          "Comment": {
+            "type": "object",
+            "properties": {
+              "master_id": {
+                "type": "integer"
+              },
+              "is_like": {
+                "type": "boolean"
+              },
+              "rating": {
+                "type": "integer"
+              },
+              "comment": {
+                "type": "string"
+              },
+              "service_id": {
+                "type": "integer",
+                "required": true
+              }
+            }
+          },
+          "Users": {
+            "type": "object",
+            "properties": {
+              "surname": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            }
+          },
+          "Login": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            }
+          },
+          "UnauthorizedError": {
+            "description": "Access token is missing or invalid"
+          }
+        },
+        "securitySchemes": {
+          "bearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+          } 
+        }
+      }
+  }

@@ -45,6 +45,7 @@
     "sequelize-slugify": "^1.6.2",
     "slug": "^8.2.2",
     "styled-components": "^5.3.6",
+    "swagger-ui-express": "^5.0.0",
     "tslib": "^2.4.1"
   }
 }

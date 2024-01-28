@@ -9,8 +9,8 @@ module.exports = function(app) {
 
   router.post("/login", upload.single(""), authClient.signin);
   router.post("/register", upload.single("image"), authClient.signup);
-  router.post("/logout", upload.single(""), authClient.logout);
   router.get("/me", [authJwt.verifyToken], authClient.me);
+  router.put("/update", [authJwt.verifyToken], authClient.update);
 
   app.use('/api/auth-master', router);
 };

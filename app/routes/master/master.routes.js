@@ -2,13 +2,12 @@ const router = require("express").Router();
 
 module.exports = app => {
 
-  const categories = require("../controllers/category.controller.js");
+  const categories = require("../../controllers/master.controller.js");
 
-  router.get("/", categories.findAll);
+  router.get("/:id", categories.findByNick);
   router.get("/c/:slug", categories.findBySlug);
-  router.get("/s/:slug", categories.findBySlugSub);
 
   // router.post("/category", upload.single("main_image"), products.findByCategories);
 
-  app.use('/api/categories', router);
+  app.use('/api/masters', router);
 };

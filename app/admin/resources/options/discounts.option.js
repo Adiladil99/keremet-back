@@ -28,6 +28,9 @@ const options = {
           show: true,
         },
       },
+      description: {
+        type: 'richtext'
+      },
       uploadImage: {
         components: {
           edit: Components.UploadImage,

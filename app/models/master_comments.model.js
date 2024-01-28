@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize, master, client) => {
+module.exports = (sequelize, Sequelize, master, client, service) => {
     const master_comments = sequelize.define("master_comments", {
       id: {
         type: Sequelize.INTEGER,
@@ -30,6 +30,13 @@ module.exports = (sequelize, Sequelize, master, client) => {
       comment: {
         type: Sequelize.STRING,
       },
+      service_id: { 
+        type: Sequelize.INTEGER,
+        references: {
+          model: service,
+          key: 'id',
+        }
+      }
     }, {
       indexes: [
         {

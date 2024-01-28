@@ -47,6 +47,7 @@ exports.signin = (req, res) => {
 
 exports.signup = (req, res) => {
   Master.create({	
+    nickname: req.body.nickname,
     surname: req.body.surname,
     name: req.body.name,
     address: req.body.address,
@@ -72,42 +73,6 @@ exports.signup = (req, res) => {
   });
 };
 
-exports.logout = (req, res) => {
-  Master.findOne({
-    where: {id: req.userId},
-    attributes: {exclude: ['createdAt', 'updatedAt']}
-  })
-    .then(user => {
-      if (!user) {
-        return res.status(404).send({ message: "User Not found." });
-      }
-
-      // var passwordIsValid = bcrypt.compareSync(
-      //   req.body.password,
-      //   user.password
-      // );
-
-      if (req.body.password !== user.password) {
-        return res.status(401).send({
-          accessToken: null,
-          message: "Invalid Password!"
-        });
-      }
-
-      var token = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: 86400 // 24 hours
-      });
-
-      
-      res.status(200).send({
-        user: user,
-        accessToken: token
-      });
-    })
-    .catch(err => {
-      res.status(500).send({ message: err.message });
-    });
-};
 
 exports.me = (req, res) => {
   Master.findOne({
@@ -146,13 +111,12 @@ exports.me = (req, res) => {
 }; 
 
 exports.update = (req, res) => {
-  Master.findOne({
+  Master.update({
     where: {id: req.userId},
-    attributes: {exclude: ['password', 'createdAt', 'updatedAt']}
-  })
+  }, req.body.params)
     .then(user => {
       if (!user) {
-        return res.status(404).send({ message: "User Not found." });
+        return res.status(404).send({ message: "Master Not found." });
       }
       res.status(200).send({
         user

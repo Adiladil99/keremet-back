@@ -10,6 +10,7 @@ const AdminJSSequelize = require('@adminjs/sequelize')
 const adminOptions = require("./app/admin");
 const moment = require('moment-timezone');
 
+const swaggerUi = require('swagger-ui-express');
 const PORT = process.env.PORT || 3003;
 // const PORT = process.env.PORT || 3000;
 const DEFAULT_ADMIN = {
@@ -38,6 +39,7 @@ const start = async () => {
   // }
   moment.tz.setDefault('Asia/Almaty');
   const app = express();
+  const swaggerDocument = require('./swagger/swagger.json');
   const admin = new AdminJS(adminOptions)
   // const admin = new AdminJS({
   //   databases: [db]
@@ -89,6 +91,8 @@ const start = async () => {
 
   app.use('/upload', express.static(path.join(__dirname, "/upload"))); 
   app.use(express.static(path.join(__dirname, "/public")));
+
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
   const Role = db.role;
   // {alter:true}

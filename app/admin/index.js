@@ -5,6 +5,7 @@ const sidebar = require("./resources/navigation");
 const category = require("./resources/options/category.option")
 const sub_category = require("./resources/options/sub_category.option")
 const master_gallery = require("./resources/options/master_gallery.option")
+const master_jobs = require("./resources/options/master_jobs.option")
 const master = require("./resources/options/master.option")
 const discounts = require("./resources/options/discounts.option")
 const { Components, componentLoader } = require('./components/components.js')
@@ -28,16 +29,6 @@ module.exports = {
     //         },
     //     },
     // },
-    {
-        resource: db.client_basket,
-        options: {
-            navigation: sidebar[1],
-            properties: {
-                createdAt: { isVisible: { list: false } },
-                updatedAt: { isVisible: { list: false } },
-            },
-        },
-    },
     {
         resource: db.client_favourites,
         options: {
@@ -73,6 +64,9 @@ module.exports = {
         options: {
             navigation: sidebar[4],
             properties: {
+                answer: {
+                    type: 'richtext'
+                },
                 createdAt: { isVisible: { list: false } },
                 updatedAt: { isVisible: { list: false } },
             },
@@ -83,11 +77,15 @@ module.exports = {
         options: {
             navigation: sidebar[2],
             properties: {
+                comment: {
+                    type: 'richtext'
+                },
                 createdAt: { isVisible: { list: false } },
                 updatedAt: { isVisible: { list: false } },
             },
         },
     },
+    master_jobs,
     master_gallery,
     {
         resource: db.master_services,
@@ -145,6 +143,9 @@ module.exports = {
         options: {
             navigation: sidebar[4],
             properties: {
+                description: {
+                    type: 'richtext'
+                },
                 createdAt: { isVisible: { list: false } },
                 updatedAt: { isVisible: { list: false } },
             },
