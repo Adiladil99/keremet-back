@@ -32,7 +32,6 @@ exports.getMainPage = async (req, res) => {
         },
       }
     })
-    const categories = await db.category.findAll()
     const faqs = await db.faq.findAll()
     const swiper = await db.category.findAll({
       where: {
@@ -122,7 +121,6 @@ exports.getMainPage = async (req, res) => {
     })
     res.send({ data: {
       discounts: discounts,
-      categories: categories,
       faq: faqs,
       reviews: reviews,
       swiper: swiperData

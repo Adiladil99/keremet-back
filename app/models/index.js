@@ -32,6 +32,8 @@ db.master_comments = require("./master_comments.model.js")(sequelize, Sequelize,
 db.master_gallery = require("./master_gallery.model.js")(sequelize, Sequelize, db.master);
 db.master_jobs = require("./master_jobs.model.js")(sequelize, Sequelize, db.master);
 db.master_services = require("./master_services.model.js")(sequelize, Sequelize, db.service, db.master);
+db.master_schedule = require("./master_schedule.model.js")(sequelize, Sequelize, db.master);
+db.master_weekend = require("./master_weekend.model.js")(sequelize, Sequelize, db.master);
 db.master_socials = require("./master_socials.model.js")(sequelize, Sequelize, db.master);
 db.order_list = require("./order_list.model.js")(sequelize, Sequelize);
 db.order = require("./order.model.js")(sequelize, Sequelize);
@@ -41,6 +43,8 @@ db.category.hasMany(db.sub_category, { as: 'subcategories', foreignKey: 'categor
 db.master.hasMany(db.master_gallery, { as: 'gallery', foreignKey: 'master_id' });
 db.master.hasMany(db.master_jobs, { as: 'jobs', foreignKey: 'master_id' });
 db.master.hasMany(db.master_services, { as: 'services', foreignKey: 'master_id' });
+db.master.hasMany(db.master_schedule, { as: 'schedule', foreignKey: 'master_id' });
+db.master.hasMany(db.master_weekend, { as: 'weekend', foreignKey: 'master_id' });
 db.master.hasMany(db.master_comments, { as: 'comments', foreignKey: 'master_id' });
 db.master.hasMany(db.master_socials, { as: 'socials', foreignKey: 'master_id' });
 

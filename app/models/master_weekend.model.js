@@ -1,15 +1,9 @@
 module.exports = (sequelize, Sequelize, master) => {
-    const master_jobs = sequelize.define("master_jobs", {
+    const master_weekend = sequelize.define("master_weekend", {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
-      },
-      name: {
-        type: Sequelize.STRING,
-      },
-      description: {
-        type: Sequelize.STRING,
       },
       master_id: {      
         type: Sequelize.INTEGER,
@@ -19,8 +13,9 @@ module.exports = (sequelize, Sequelize, master) => {
           key: 'id',
         }
       },
-      image: {
-        type: Sequelize.STRING,
+      date: {
+        type: Sequelize.DATE,
+        allowNull: false
       }
     }, {
       indexes: [
@@ -31,6 +26,6 @@ module.exports = (sequelize, Sequelize, master) => {
       ]
     });
   
-    return master_jobs;
+    return master_weekend;
   };
   

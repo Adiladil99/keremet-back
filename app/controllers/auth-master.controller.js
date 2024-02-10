@@ -84,7 +84,14 @@ exports.me = (req, res) => {
       },
       {
         model: db.master_comments,
-        as: "comments"
+        as: "comments",
+        include: [
+          {
+            model: db.client,
+            as: "client",
+            attributes: {exclude: ['password', 'createdAt', 'updatedAt']}
+          }
+        ],
       },
       {
         model: db.master_gallery,
@@ -94,6 +101,14 @@ exports.me = (req, res) => {
         model: db.master_socials,
         as: "socials"
       },
+      {
+        model: db.master_jobs,
+        as: "jobs"
+      },
+      {
+        model: db.master_weekend,
+        as: "weekend"
+      }
     ],
     attributes: {exclude: ['password', 'createdAt', 'updatedAt']}
   })

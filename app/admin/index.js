@@ -98,6 +98,26 @@ module.exports = {
         },
     },
     {
+        resource: db.master_schedule,
+        options: {
+            navigation: sidebar[2],
+            properties: {
+                createdAt: { isVisible: { list: false } },
+                updatedAt: { isVisible: { list: false } },
+            },
+        },
+    },
+    {
+        resource: db.master_weekend,
+        options: {
+            navigation: sidebar[2],
+            properties: {
+                createdAt: { isVisible: { list: false } },
+                updatedAt: { isVisible: { list: false } },
+            },
+        },
+    },
+    {
         resource: db.master_socials,
         options: {
             navigation: sidebar[2],
