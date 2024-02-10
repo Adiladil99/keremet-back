@@ -569,7 +569,7 @@
             }
           },
           "responses": {
-            "200": {
+            "201": {
               "description": "Данные мастера",
               "content": {
                 "application/json": {
