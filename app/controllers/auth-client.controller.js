@@ -90,9 +90,9 @@ exports.me = (req, res) => {
 }; 
 
 exports.update = (req, res) => {
-  Client.update({
+  Client.update(req.body, {
     where: {id: req.userId},
-  }, req.body.params)
+  })
     .then(user => {
       if (!user) {
         return res.status(404).send({ message: "User Not found." });
@@ -105,3 +105,68 @@ exports.update = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 }; 
+
+exports.updateImage = (req, res) => {
+  Client.update({
+    image: "/upload/" + req.file.filename
+  }, {
+    where: {id: req.userId},
+  })
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({ message: "User Not found." });
+      }
+      res.status(200).send({
+        user
+      });
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+exports.changePassword = (req, res) => {
+  Client.findOne({
+    where: {
+      id: req.userId
+    },
+    attributes: {exclude: ['createdAt', 'updatedAt']}
+  })
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({ message: "User Not found." });
+      }
+
+      var passwordIsValid = bcrypt.compareSync(
+        req.body.password,
+        user.password
+      );
+
+      if (!passwordIsValid) {
+        return res.status(401).send({
+          accessToken: null,
+          message: "Invalid Password!"
+        });
+      } else {
+        Client.update({
+          password: bcrypt.hashSync(req.body.new_password, 8)
+        }, {
+          where: {id: req.userId},
+        })
+          .then(user => {
+            if (!user) {
+              return res.status(404).send({ message: "User Not found." });
+            }
+            res.status(200).send({
+              user
+            });
+          })
+          .catch(err => {
+            res.status(500).send({ message: err.message });
+          });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};

@@ -220,6 +220,20 @@
                 }
               }
             }
+          },
+          "responses": {
+            "200": {
+              "description": "Данные клиента",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Client"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -233,6 +247,20 @@
               "multipart/form-data": {
                 "schema": {
                   "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Данные клиента",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Client"
+                    }
+                  }
                 }
               }
             }
@@ -269,6 +297,94 @@
               "multipart/form-data": {
                 "schema": {
                   "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Данные клиента",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Client"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth-client/update-image": {
+        "put": {
+          "summary": "Обновление аватарки клиента",
+          "tags": ["Клиенты"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "image": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Данные клиента",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Client"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth-client/change-password": {
+        "put": {
+          "summary": "Смена пароля клиента",
+          "tags": ["Клиенты"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "password": {
+                      "type": "string"
+                    },
+                    "new_password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Данные клиента",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Client"
+                    }
+                  }
                 }
               }
             }
@@ -451,6 +567,20 @@
                 }
               }
             }
+          },
+          "responses": {
+            "200": {
+              "description": "Данные мастера",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Master"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -478,6 +608,44 @@
         "put": {
           "summary": "Редактировать данные мастера",
           "tags": ["Мастер (авторизация)"],
+          "responses": {
+            "200": {
+              "description": "Данные мастера",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Master"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth-master/change-password": {
+        "put": {
+          "summary": "Смена пароля мастера",
+          "tags": ["Мастер (авторизация)"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "password": {
+                      "type": "string"
+                    },
+                    "new_password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "responses": {
             "200": {
               "description": "Данные мастера",
@@ -1679,6 +1847,10 @@
               },
               "name": {
                 "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "description": "('Мастер', 'Барбер', 'Врач', 'Массажист', 'Косметолог', 'Парикмахер', 'Стилист') - отправить один их этих значении"
               },
               "email": {
                 "type": "string"

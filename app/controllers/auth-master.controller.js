@@ -52,6 +52,7 @@ exports.signup = (req, res) => {
     name: req.body.name,
     address: req.body.address,
     email: req.body.email,
+    type: req.body.type,
     phone: req.body.phone,
     gender: req.body.gender,
     birthday: req.body.birthday,
@@ -126,9 +127,9 @@ exports.me = (req, res) => {
 }; 
 
 exports.update = (req, res) => {
-  Master.update({
+  Master.update(req.body, {
     where: {id: req.userId},
-  }, req.body.params)
+  })
     .then(user => {
       if (!user) {
         return res.status(404).send({ message: "Master Not found." });
@@ -141,3 +142,49 @@ exports.update = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 }; 
+
+exports.changePassword = (req, res) => {
+  db.master.findOne({
+    where: {
+      id: req.userId
+    },
+    attributes: {exclude: ['createdAt', 'updatedAt']}
+  })
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({ message: "Master Not found." });
+      }
+
+      var passwordIsValid = bcrypt.compareSync(
+        req.body.password,
+        user.password
+      );
+
+      if (!passwordIsValid) {
+        return res.status(401).send({
+          accessToken: null,
+          message: "Invalid Password!"
+        });
+      } else {
+        db.master.update({
+          password: bcrypt.hashSync(req.body.new_password, 8)
+        }, {
+          where: {id: req.userId},
+        })
+          .then(user => {
+            if (!user) {
+              return res.status(404).send({ message: "Master Not found." });
+            }
+            res.status(200).send({
+              user
+            });
+          })
+          .catch(err => {
+            res.status(500).send({ message: err.message });
+          });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
