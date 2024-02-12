@@ -6,7 +6,7 @@ module.exports = app => {
 
   router.get("/", categories.findAll);
   router.get("/c/:slug", categories.findBySlug);
-  router.get("/s/:slug", categories.findBySlugSub);
+  // router.get("/s/:slug", categories.findBySlugSub);
 
   // router.post("/category", upload.single("main_image"), products.findByCategories);
 

@@ -159,33 +159,17 @@
               "schema": {
                 "type": "string"
               }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Данные страницы",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "items": {
-                      "$ref": "#/components/schemas/Static_Info"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/categories/s/{slug}": {
-        "get": {
-          "summary": "Получить данные по подкатегории",
-          "tags": ["API для страниц сайта"],
-          "parameters": [
+            },
             {
-              "name": "slug",
-              "in": "path",
-              "required": true,
+              "name": "subcategory",
+              "in": "query",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "service",
+              "in": "query",
               "schema": {
                 "type": "string"
               }
